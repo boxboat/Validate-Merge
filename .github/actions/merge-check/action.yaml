@@ -27,7 +27,7 @@ runs:
           then
             ACCEPTABLE=true
           fi
-        done <<< "$MERGE_OPTIONS
+        done <<< "$MERGE_OPTIONS"
         
         if [[ $PASS == "true" ]]
         then
