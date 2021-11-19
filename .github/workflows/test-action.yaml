@@ -11,7 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: ./.github/actions/merge-check
+      - name: Validate Merge
+        uses: boxboat/Validate-Merge@0.0.1
         with:
           ACCEPTABLE_MERGES: |
             dev -> test
