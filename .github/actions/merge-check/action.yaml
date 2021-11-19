@@ -17,7 +17,7 @@ runs:
         for ACCEPTABLE_MERGE in $ACCEPTABLE_MERGES
         do
           FROM_BRANCH=$(echo ACCEPTABLE_MERGE | cut -f 1 -d " ")
-          TO_BRANCH$(echo ACCEPTABLE_MERGE | rev | cut -f 1 -d " " | rev)
+          TO_BRANCH=$(echo ACCEPTABLE_MERGE | rev | cut -f 1 -d " " | rev)
           if [[ "${{github.head_ref}}" == $FROM_BRANCH ]] && \
              [[ "${{github.base_ref}}" == $TO_BRANCH ]]
           then
