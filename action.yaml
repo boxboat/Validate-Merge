@@ -1,6 +1,9 @@
 name: 'Validate Merge'
 description: 'Validate merge direction'
 author: 'BoxBoat'
+branding:
+  color: blue
+  icon: git-merge
 inputs:
   ACCEPTABLE_MERGES:
     description: 'A list of acceptable merges'
