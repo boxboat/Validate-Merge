@@ -12,6 +12,7 @@ runs:
       run: |
         echo "PR merging from: ${{ github.head_ref }}"
         echo "PR merging to: ${{ github.base_ref }}"
+        echo "Possible Merges: ${{ env.ACCEPTABLE_MERGES }}
         
         ACCEPTABLE=false
         for ACCEPTABLE_MERGE in ${{ env.ACCEPTABLE_MERGES }}
