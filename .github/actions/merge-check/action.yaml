@@ -1,9 +1,6 @@
 name: 'Merge Check'
 description: 'Validate merge direction'
 inputs:
-  BRANCH_STRATEGY:
-    description: 'The name of your branching strategy'
-    required: true
   ACCEPTABLE_MERGES:
     description: 'A list of acceptable merges`
     required: true
