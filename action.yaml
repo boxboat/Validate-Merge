@@ -1,5 +1,5 @@
 name: 'Validate Merge'
-description: 'Validate merge direction'
+description: 'Prevent Pull Requests from merging to the wrong place.'
 author: 'BoxBoat'
 branding:
   color: blue
