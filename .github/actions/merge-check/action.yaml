@@ -15,10 +15,11 @@ runs:
         echo "Possible Merges: ${{ inputs.ACCEPTABLE_MERGES }}"
         
         ACCEPTABLE=false
-        for ACCEPTABLE_MERGE in ${{ inputs.ACCEPTABLE_MERGES }}
+        MERGE_OPTIONS="${{ inputs.ACCEPTABLE_MERGES }}"
+        for MERGE_OPTION in $MERGE_OPTIONS
         do
-          FROM_BRANCH=$(echo ACCEPTABLE_MERGE | cut -f 1 -d " ")
-          TO_BRANCH=$(echo ACCEPTABLE_MERGE | rev | cut -f 1 -d " " | rev)
+          FROM_BRANCH=$(echo MERGE_OPTION | cut -f 1 -d " ")
+          TO_BRANCH=$(echo MERGE_OPTION | rev | cut -f 1 -d " " | rev)
           if [[ "${{github.head_ref}}" == $FROM_BRANCH ]] && \
              [[ "${{github.base_ref}}" == $TO_BRANCH ]]
           then
@@ -31,6 +32,6 @@ runs:
           echo "You're okay to merge!"
         else
           echo "::error ::You cannot merge branch '${{github.head_ref}}' to branch '${{github.base_ref}}'."
-          echo "::error ::Possible merges are: $ACCEPTABLE_MERGES"
+          echo "::error ::Possible merges are: $MERGE_OPTIONS"
           exit 1;
         fi
