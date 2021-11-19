@@ -10,8 +10,7 @@ runs:
     - name: Validate Merge Direction
       shell: bash
       run: |
-        echo "PR merging from: ${{ github.head_ref }}"
-        echo "PR merging to: ${{ github.base_ref }}"
+        echo "Merging ${{ github.head_ref }} -> ${{ github.base_ref }}"
         echo "Possible Merges:"
         
         ACCEPTABLE=false
@@ -20,10 +19,9 @@ runs:
         while IFS= read -r MERGE_OPTION
         do
           echo "  $MERGE_OPTION"
+          
           FROM_BRANCH=$(echo $MERGE_OPTION | cut -f 1 -d " ")
           TO_BRANCH=$(echo $MERGE_OPTION | rev | cut -f 1 -d " " | rev)
-          echo $FROM_BRANCH
-          echo $TO_BRANCH
           
           if [[ "${{github.head_ref}}" == "$FROM_BRANCH" ]] && \
              [[ "${{github.base_ref}}" == "$TO_BRANCH" ]]
@@ -36,7 +34,6 @@ runs:
         then
           echo "You're okay to merge!"
         else
-          echo "::error ::You cannot merge branch '${{github.head_ref}}' to branch '${{github.base_ref}}'."
-          echo "::error ::Possible merges are: $MERGE_OPTIONS"
+          echo "::error ::You cannot merge '${{github.head_ref}}' -> '${{github.base_ref}}'."
           exit 1;
         fi
