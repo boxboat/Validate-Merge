@@ -20,8 +20,8 @@ runs:
         while IFS= read -r MERGE_OPTION
         do
           echo "  $MERGE_OPTION"
-          FROM_BRANCH=$(echo MERGE_OPTION | cut -f 1 -d " ")
-          TO_BRANCH=$(echo MERGE_OPTION | rev | cut -f 1 -d " " | rev)
+          FROM_BRANCH=$(echo $MERGE_OPTION | cut -f 1 -d " ")
+          TO_BRANCH=$(echo $MERGE_OPTION | rev | cut -f 1 -d " " | rev)
           echo $FROM_BRANCH
           echo $TO_BRANCH
           
