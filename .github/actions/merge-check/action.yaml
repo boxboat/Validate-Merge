@@ -14,7 +14,7 @@ runs:
         echo "PR merging to: ${{ github.base_ref }}"
         
         ACCEPTABLE=false
-        for ACCEPTABLE_MERGE in $ACCEPTABLE_MERGES
+        for ACCEPTABLE_MERGE in ${{ env.ACCEPTABLE_MERGES }}
         do
           FROM_BRANCH=$(echo ACCEPTABLE_MERGE | cut -f 1 -d " ")
           TO_BRANCH=$(echo ACCEPTABLE_MERGE | rev | cut -f 1 -d " " | rev)
