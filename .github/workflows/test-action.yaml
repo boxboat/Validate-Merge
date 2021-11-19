@@ -1,0 +1,17 @@
+name: Test Action
+
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+  
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - uses: .github/actions/merge-check
+        with:
+          ACCEPTABLE_MERGES: |
+            dev -> main
