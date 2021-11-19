@@ -12,12 +12,13 @@ runs:
       run: |
         echo "PR merging from: ${{ github.head_ref }}"
         echo "PR merging to: ${{ github.base_ref }}"
-        echo "Possible Merges: ${{ inputs.ACCEPTABLE_MERGES }}"
+        echo "Possible Merges:"
         
         ACCEPTABLE=false
         MERGE_OPTIONS="${{ inputs.ACCEPTABLE_MERGES }}"
         for MERGE_OPTION in $MERGE_OPTIONS
         do
+          echo "  $MERGE_OPTION"
           FROM_BRANCH=$(echo MERGE_OPTION | cut -f 1 -d " ")
           TO_BRANCH=$(echo MERGE_OPTION | rev | cut -f 1 -d " " | rev)
           if [[ "${{github.head_ref}}" == $FROM_BRANCH ]] && \
