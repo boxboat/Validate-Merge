@@ -2,7 +2,7 @@ name: 'Merge Check'
 description: 'Validate merge direction'
 inputs:
   ACCEPTABLE_MERGES:
-    description: 'A list of acceptable merges`
+    description: 'A list of acceptable merges'
     required: true
 runs:
   using: "composite"
