@@ -1,5 +1,6 @@
 name: 'Validate Merge'
 description: 'Validate merge direction'
+author: 'BoxBoat'
 inputs:
   ACCEPTABLE_MERGES:
     description: 'A list of acceptable merges'
