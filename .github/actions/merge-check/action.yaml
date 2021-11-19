@@ -16,7 +16,8 @@ runs:
         
         ACCEPTABLE=false
         MERGE_OPTIONS="${{ inputs.ACCEPTABLE_MERGES }}"
-        for MERGE_OPTION in $MERGE_OPTIONS
+        # for MERGE_OPTION in $MERGE_OPTIONS
+        while IFS= read -r MERGE_OPTION
         do
           echo "  $MERGE_OPTION"
           FROM_BRANCH=$(echo MERGE_OPTION | cut -f 1 -d " ")
@@ -26,7 +27,7 @@ runs:
           then
             ACCEPTABLE=true
           fi
-        done
+        done <<< "$MERGE_OPTIONS
         
         if [[ $PASS == "true" ]]
         then
