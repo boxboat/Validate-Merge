@@ -1,0 +1,39 @@
+name: 'Merge Check'
+description: 'Validate merge direction'
+inputs:
+  ACCEPTABLE_MERGES:
+    description: 'A list of acceptable merges'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Validate Merge Direction
+      shell: bash
+      run: |
+        echo "Merging ${{ github.head_ref }} -> ${{ github.base_ref }}"
+        echo "Possible Merges:"
+        
+        ACCEPTABLE=false
+        MERGE_OPTIONS="${{ inputs.ACCEPTABLE_MERGES }}"
+        
+        while IFS= read -r MERGE_OPTION
+        do
+          echo "  $MERGE_OPTION"
+          
+          FROM_BRANCH=$(echo $MERGE_OPTION | cut -f 1 -d " ")
+          TO_BRANCH=$(echo $MERGE_OPTION | rev | cut -f 1 -d " " | rev)
+          
+          if [[ "${{github.head_ref}}" == "$FROM_BRANCH" ]] && \
+             [[ "${{github.base_ref}}" == "$TO_BRANCH" ]]
+          then
+            ACCEPTABLE=true
+          fi
+        done <<< "$MERGE_OPTIONS"
+        
+        if [[ $ACCEPTABLE == "true" ]]
+        then
+          echo "You're okay to merge!"
+        else
+          echo "::error ::You cannot merge '${{github.head_ref}}' -> '${{github.base_ref}}'."
+          exit 1;
+        fi
