@@ -12,10 +12,10 @@ runs:
       run: |
         echo "PR merging from: ${{ github.head_ref }}"
         echo "PR merging to: ${{ github.base_ref }}"
-        echo "Possible Merges: ${{ env.ACCEPTABLE_MERGES }}"
+        echo "Possible Merges: ${{ inputs.ACCEPTABLE_MERGES }}"
         
         ACCEPTABLE=false
-        for ACCEPTABLE_MERGE in ${{ env.ACCEPTABLE_MERGES }}
+        for ACCEPTABLE_MERGE in ${{ inputs.ACCEPTABLE_MERGES }}
         do
           FROM_BRANCH=$(echo ACCEPTABLE_MERGE | cut -f 1 -d " ")
           TO_BRANCH=$(echo ACCEPTABLE_MERGE | rev | cut -f 1 -d " " | rev)
