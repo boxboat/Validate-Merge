@@ -1,0 +1,38 @@
+name: 'Merge Check'
+description: 'Validate merge direction'
+inputs:
+  BRANCH_STRATEGY:
+    description: 'The name of your branching strategy'
+    required: true
+  ACCEPTABLE_MERGES:
+    description: 'A list of acceptable merges`
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Validate Merge Direction
+      shell: bash
+      run: |
+        echo "PR merging from: ${{ github.head_ref }}"
+        echo "PR merging to: ${{ github.base_ref }}"
+        
+        ACCEPTABLE=false
+        for ACCEPTABLE_MERGE in $ACCEPTABLE_MERGES
+        do
+          FROM_BRANCH=$(echo ACCEPTABLE_MERGE | cut -f 1 -d " ")
+          TO_BRANCH$(echo ACCEPTABLE_MERGE | rev | cut -f 1 -d " " | rev)
+          if [[ "${{github.head_ref}}" == $FROM_BRANCH ]] && \
+             [[ "${{github.base_ref}}" == $TO_BRANCH ]]
+          then
+            ACCEPTABLE=true
+          fi
+        done
+        
+        if [[ $PASS == "true" ]]
+        then
+          echo "You're okay to merge!"
+        else
+          echo "::error ::You cannot merge branch '${{github.head_ref}}' to branch '${{github.base_ref}}'."
+          echo "::error ::Possible merges are: $ACCEPTABLE_MERGES"
+          exit 1;
+        fi
