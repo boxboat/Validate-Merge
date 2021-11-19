@@ -1,4 +1,4 @@
-name: 'Merge Check'
+name: 'Validate Merge'
 description: 'Validate merge direction'
 inputs:
   ACCEPTABLE_MERGES:
